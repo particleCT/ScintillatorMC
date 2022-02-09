@@ -1,0 +1,90 @@
+#Author: Fada Guan
+#Date: 02/15/2021
+#QGSP_BIC_HP_EMZ physics list is the best for Bragg curves, Dennis Wright, 2019
+#gantry angle: 0 deg with beam sigmaY > sigmaX
+#nominal energy: 163.9 MeV
+#nominal range by Hitachi(ICRU): 18.05 cm in water
+#note: 7.36e+8 protons/MU at the nozzle entrance, but only 99.41% of protons can reach iso center(using Z=-0.1cm in simulations)
+#therefore, 7.316576e+8 protons/MU at Z=-0.1 cm
+#based on test31.mac of gps source to define two beams with different intensities, different sigma_x and sigma_y
+#the beam intensit is relative value
+#source plane at z=-0.1 cm, very very close to iso center
+#protons fly along +z axis
+
+#/control/verbose 2
+#/run/verbose 2
+
+#/run/initialize
+
+#beam 1 with a smaller spot size sigma, but a higher beam intensity
+#this is the default first source
+/gps/source/intensity 0.742
+/gps/particle proton
+
+/gps/pos/type Beam
+/gps/pos/shape Circle
+#/gps/pos/centre 0. 0. -0.1 cm
+/gps/pos/radius 0. cm
+#beam1d sigma conversion is not correct
+#we should use 2d instead
+/gps/pos/sigma_x 0.6393 cm
+/gps/pos/sigma_y 0.67524 cm
+
+#the default direction of beam is -z' axis
+#use rotation matrices, beam can fly along z axis
+#rot1 is new x' axis, rot2 is new y' axis
+#rot1 X rot2 is new z' axis
+#below old y is new x', old x is new y'
+#so, new z' is old -z, new -z' is old z, particle flies along -z' means along old z axis
+/gps/ang/rot1 0 1 0
+/gps/ang/rot2 1 0 0
+/gps/ang/type beam1d
+/gps/ang/mintheta 0 deg
+/gps/ang/maxtheta 1.0 deg
+#1 rad = 57.3 deg
+/gps/ang/sigma_r 0.25 deg
+
+#2021-01-17, read in proton KE spectrum instead of Gauss
+#Arb means point-wise spectrum
+/gps/ene/type Arb
+/gps/hist/file ./macro/source/protonKEspectrumAtZ-0.1cm_71_163.9MeV.dat
+#this interpolation must be issued immediately after the last data point-wise
+/gps/hist/inter Lin
+
+/gps/source/show
+
+#beam 2 with a bigger spot size sigma, but a lower beam intensity (to match lateral low dose tail)
+/gps/source/add 0.24 
+/gps/particle proton
+
+/gps/pos/type Beam
+/gps/pos/shape Circle
+#/gps/pos/centre 0. 0. -0.1 cm
+/gps/pos/radius 0. cm
+#beam1d sigma conversion is not correct
+#we should use 2d instead
+/gps/pos/sigma_x 1.28434 cm
+/gps/pos/sigma_y 1.30028 cm
+
+#the default direction of beam is -z' axis
+#use rotation matrices, beam can fly along z axis
+#rot1 is new x' axis, rot2 is new y' axis
+#rot1 X rot2 is new z' axis
+#below old y is new x', old x is new y'
+#so, new z' is old -z, new -z' is old z, particle flies along -z' means along old z axis
+/gps/ang/rot1 0 1 0
+/gps/ang/rot2 1 0 0
+/gps/ang/type beam1d
+/gps/ang/mintheta 0 deg
+/gps/ang/maxtheta 1.0 deg
+#1 rad = 57.3 deg
+/gps/ang/sigma_r 0.25 deg
+
+/gps/source/show
+
+#2021-01-17, read in proton KE spectrum instead of Gauss
+#Arb means point-wise spectrum
+/gps/ene/type Arb
+/gps/hist/file ./macro/source/protonKEspectrumAtZ-0.1cm_71_163.9MeV.dat
+#this interpolation must be issued immediately after the last data point-wise
+/gps/hist/inter Lin

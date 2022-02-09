@@ -1,0 +1,24 @@
+#Author: Fada Guan
+#Date: 2021-02-09
+#run.mac file for a single beamlet along the central Z axis
+#nominal energy: 163.9 MeV
+#nominal range by Hitachi(ICRU): 18.05 cm in water
+
+#2015-09-15, only cout for a specified thread, i.e., -1 for master, 0 for first worker thread ID 0(preInit and idle)
+/control/cout/ignoreThreadsExcept 0
+
+/control/verbose 2
+/run/verbose 2
+
+#2019-06-12, set # of threads before initialize
+#/run/numberOfThreads 14
+
+#initialize before gps commands and beamOn
+/run/initialize
+
+#specify particle source info such as energy, direction, and location(deafult is at 0,0,0 cm)
+/control/execute macro/source/71_163.9MeV_atZ-0.1cm.mac 
+
+#scanning to form a 10 x 10 cm2 field, the spot location in 71_163.9MeV_atZ-0.1cm.mac will be overridden below 
+#note: it include spot center positions. The uniform dose field is smaller than 10 x 10 cm2
+/control/execute macro/source/spot_positionsAtZ-0.1cm_71_163.9MeV.mac

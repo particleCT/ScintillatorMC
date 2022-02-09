@@ -1,0 +1,7 @@
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/install/strip.dir
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/install/local.dir
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/install.dir
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/list_install_components.dir
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/rebuild_cache.dir
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/edit_cache.dir
+/home/ryan/Documents/ScintillatorMC/Full_scint/ScintillatorMC/build/CMakeFiles/ScintillatorMC.dir
